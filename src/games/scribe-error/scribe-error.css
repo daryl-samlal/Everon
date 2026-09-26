@@ -1,0 +1,15 @@
+.scribe-error-word {
+  animation: scribe-word-in 280ms ease-out both;
+}
+
+.scribe-error-word:nth-child(2n) { animation-delay: 35ms; }
+.scribe-error-word:nth-child(3n) { animation-delay: 70ms; }
+
+@keyframes scribe-word-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scribe-error-word { animation: none; }
+}

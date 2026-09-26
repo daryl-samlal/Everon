@@ -2,11 +2,12 @@ import type { Lesson } from '@/data/lesson'
 
 export type FeedGame = {
   gameId: string
+  engineType?: 'verse-slicer' | 'trivia' | 'pinpoint' | 'versele' | 'scribe-error' | 'connections'
   title: string
   description: string
   badge: string
   icon: string
-  available: boolean
+  available?: boolean
 }
 
 export type FeedCard = {
@@ -14,6 +15,8 @@ export type FeedCard = {
   type: 'content' | 'game-grid'
   backgroundType: 'image' | 'video' | 'gradient'
   mediaUrl?: string
+  cardTitle?: string
+  cardSubtitle?: string
   overlayText?: { title?: string; reference?: string; hook?: string; insight?: string }
   games?: FeedGame[]
 }
@@ -25,6 +28,8 @@ export type DevotionalFeedPayload = {
 }
 
 export function createDevotionalFeed(lesson: Lesson): DevotionalFeedPayload {
+  if (lesson.cards?.length) return { devotionalId: lesson.lessonId, title: lesson.devotional.title, cards: lesson.cards }
+
   return {
     devotionalId: lesson.lessonId,
     title: lesson.devotional.title,
@@ -47,11 +52,15 @@ export function createDevotionalFeed(lesson: Lesson): DevotionalFeedPayload {
         cardIndex: 3,
         type: 'game-grid',
         backgroundType: 'gradient',
-        mediaUrl: 'gradient-games',
+        mediaUrl: 'gradient-arcade-dark',
+        cardTitle: 'Lock it in.',
+        cardSubtitle: "Choose a game to lock in today's verse.",
+        overlayText: { reference: `${lesson.reference} · ${lesson.translation}` },
         games: [
-          { gameId: `verse-slicer-${lesson.lessonId}`, title: 'Verse Slicer', description: 'Tap words in chronological order.', badge: 'Arcade', icon: '⚡', available: true },
-          { gameId: `trivia-${lesson.lessonId}`, title: 'Bible Trivia', description: 'Test what stayed with you.', badge: 'Quiz', icon: '✦', available: true },
-          { gameId: `connections-${lesson.lessonId}`, title: 'Bible Connections', description: 'Group the theme words together.', badge: 'Puzzle', icon: '◈', available: false },
+          { gameId: `verse-slicer-${lesson.lessonId}`, engineType: 'verse-slicer', title: 'Verse Slicer', description: 'Tap words in chronological order.', badge: 'Arcade', icon: '⚡' },
+          { gameId: 'pinpoint-joseph-01', engineType: 'pinpoint', title: 'Pinpoint', description: 'Guess the biblical answer before the clues run out.', badge: 'Logic', icon: '◎' },
+          { gameId: 'versele-prov-3-5', engineType: 'versele', title: 'Versele', description: 'Uncover every word in the memory verse.', badge: 'Words', icon: '▦' },
+          { gameId: 'connections-wilderness-01', engineType: 'connections', title: 'Bible Connections', description: 'Group the theme words together.', badge: 'Puzzle', icon: '◈' },
         ],
       },
     ],

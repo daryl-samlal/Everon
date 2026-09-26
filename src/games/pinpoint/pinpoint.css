@@ -1,0 +1,8 @@
+.pinpoint-clue {
+  animation: pinpoint-clue-in 420ms ease-out both;
+}
+
+@keyframes pinpoint-clue-in {
+  from { opacity: 0; transform: translateY(10px) rotateX(-4deg); }
+  to { opacity: 1; transform: translateY(0) rotateX(0); }
+}

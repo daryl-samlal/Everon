@@ -1,0 +1,22 @@
+{
+  "gameId": "scribe-error-01",
+  "reference": "Psalm 23:1",
+  "corruptedText": ["The", "KING", "is", "my", "gardener;", "I", "shall", "not", "hunger."],
+  "errors": [
+    {
+      "wordIndex": 1,
+      "corruptedWord": "KING",
+      "correctWord": "LORD"
+    },
+    {
+      "wordIndex": 4,
+      "corruptedWord": "gardener;",
+      "correctWord": "shepherd;"
+    },
+    {
+      "wordIndex": 8,
+      "corruptedWord": "hunger.",
+      "correctWord": "want."
+    }
+  ]
+}

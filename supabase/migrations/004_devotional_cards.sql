@@ -1,0 +1,1 @@
+alter table public.devotionals add column if not exists cards jsonb not null default '[]'::jsonb;

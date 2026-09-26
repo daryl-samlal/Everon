@@ -1,0 +1,22 @@
+{
+  "gameId": "connections-wilderness-01",
+  "title": "Wilderness & Wandering",
+  "categories": [
+    {
+      "name": "Miraculous Provision",
+      "items": ["Manna", "Quail", "Water from Rock", "Pillar of Fire"]
+    },
+    {
+      "name": "Key Leaders",
+      "items": ["Moses", "Aaron", "Joshua", "Caleb"]
+    },
+    {
+      "name": "Wilderness Locations",
+      "items": ["Sinai", "Kadesh", "Rephidim", "Jordan"]
+    },
+    {
+      "name": "Tent of Meeting Objects",
+      "items": ["Ark", "Altar", "Lampstand", "Basin"]
+    }
+  ]
+}

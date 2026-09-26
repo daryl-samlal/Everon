@@ -13,6 +13,7 @@
 .devotional-feed-gradient { background: radial-gradient(circle at 78% 18%, rgba(242,201,76,.25), transparent 25%), linear-gradient(145deg, #102a43, #173f5f 55%, #396c73); }
 .gradient-insight { background: radial-gradient(circle at 22% 28%, rgba(242,201,76,.2), transparent 27%), linear-gradient(145deg, #173f5f, #102a43 72%); }
 .gradient-games { background: radial-gradient(circle at 80% 15%, rgba(242,201,76,.28), transparent 24%), linear-gradient(145deg, #421f43, #102a43 75%); }
+.gradient-arcade-dark { background: radial-gradient(circle at 18% 20%, rgba(242,201,76,.2), transparent 24%), radial-gradient(circle at 85% 75%, rgba(242,107,94,.2), transparent 28%), linear-gradient(145deg, #151b3b, #102a43 72%); }
 .devotional-feed-vignette { background: linear-gradient(180deg, rgba(16,42,67,.12) 25%, rgba(7,24,38,.9) 100%); z-index: 1; }
 .devotional-game-tile { min-height: 13rem; border: 1px solid rgba(255,255,255,.2); border-radius: 1.25rem; background: rgba(255,255,255,.1); padding: 1.25rem; backdrop-filter: blur(14px); transition: transform .2s, background .2s; }
 .devotional-game-tile:hover { transform: translateY(-4px); background: rgba(255,255,255,.17); }

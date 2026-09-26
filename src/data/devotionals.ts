@@ -1,10 +1,12 @@
 import { devotionalLessons, type Lesson } from '@/data/lesson'
+import type { FeedCard } from '@/data/devotional-feed'
 import { supabase } from '@/lib/supabase'
 
 export type DevotionalDraft = Pick<Lesson, 'category' | 'reference' | 'translation'> & {
   title: string
   hook: string
   insight: string
+  cards: FeedCard[]
 }
 
 const localKey = 'everon-devotionals'
@@ -29,6 +31,7 @@ export async function loadDevotionals() {
     translation: item.translation,
     devotional: { title: item.title, hook: item.hook, insight: item.insight },
     game: devotionalLessons[0].game,
+    cards: item.cards as FeedCard[] | undefined,
   }))]
 }
 
@@ -40,6 +43,7 @@ export async function saveDevotional(draft: DevotionalDraft) {
     translation: draft.translation,
     devotional: { title: draft.title, hook: draft.hook, insight: draft.insight },
     game: devotionalLessons[0].game,
+    cards: draft.cards,
   }
 
   if (supabase) {
@@ -47,7 +51,7 @@ export async function saveDevotional(draft: DevotionalDraft) {
     if (!user) throw new Error('You must be signed in to create a devotional.')
     const { error } = await supabase.from('devotionals').insert({
       owner_id: user.id, title: draft.title, category: draft.category, reference: draft.reference,
-      translation: draft.translation, hook: draft.hook, insight: draft.insight,
+      translation: draft.translation, hook: draft.hook, insight: draft.insight, cards: draft.cards,
     })
     if (error) throw error
   } else {

@@ -1,0 +1,12 @@
+{
+  "gameId": "pinpoint-joseph-01",
+  "title": "Pinpoint: The Dreamer",
+  "category": "Old Testament Figures",
+  "clues": [
+    "Sold by his brothers for 20 pieces of silver.",
+    "Given an ornate, multi-colored coat by his father.",
+    "Interpreted Pharaoh's dreams of fat and lean cattle."
+  ],
+  "acceptedAnswers": ["Joseph", "Son of Jacob"],
+  "pointsPerClue": [100, 75, 50]
+}

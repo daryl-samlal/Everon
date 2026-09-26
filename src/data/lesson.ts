@@ -1,4 +1,5 @@
 import type { VerseSlicerConfig } from '@/games/verse-slicer/verse-slicer-engine'
+import type { FeedCard } from '@/data/devotional-feed'
 
 export type Lesson = {
   lessonId: string
@@ -7,6 +8,7 @@ export type Lesson = {
   translation: string
   devotional: { title: string; hook: string; insight: string }
   game: VerseSlicerConfig
+  cards?: FeedCard[]
 }
 
 export const featuredLesson: Lesson = {
