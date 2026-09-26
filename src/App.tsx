@@ -12,6 +12,8 @@ import { supabase } from '@/lib/supabase'
 import type { ScoreEntry } from '@/lib/types'
 import { VerseSlicer } from '@/games/verse-slicer/VerseSlicer'
 import { DevotionalExperience } from '@/components/DevotionalExperience'
+import { Devotionals } from '@/components/Devotionals'
+import { DevotionalCreator } from '@/components/DevotionalCreator'
 
 const leaderboard: ScoreEntry[] = [
   { name: 'Maya R.', score: 1840, badge: '1st' },
@@ -22,10 +24,11 @@ const leaderboard: ScoreEntry[] = [
 
 function Home() {
   const navigate = useNavigate()
+  const today = new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'long', day: 'numeric' }).format(new Date()).toUpperCase()
   return <div className="space-y-6 animate-[fade-in_.5s_ease-out]">
     <section className="relative overflow-hidden rounded-[2rem] bg-ink px-6 py-7 text-white shadow-xl sm:px-10 sm:py-10">
       <div className="absolute -right-10 -top-12 h-44 w-44 rounded-full border-[22px] border-sun/25" /><div className="absolute bottom-[-4rem] right-20 h-36 w-36 rounded-full bg-coral/20" />
-      <div className="relative max-w-xl"><div className="mb-4 flex items-center gap-2 text-sm font-bold text-sun"><Sparkles size={16} /> WEDNESDAY, SEPTEMBER 20</div><h1 className="font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">Grow together.<br /><span className="text-sun">Play with purpose.</span></h1><p className="mt-4 max-w-sm text-sm leading-6 text-white/70">A little friendly competition can open the door to something much bigger.</p><Button className="mt-7" onClick={() => navigate('/games')}>Play today <ArrowRight className="ml-2" size={18} /></Button></div>
+      <div className="relative max-w-xl"><div className="mb-4 flex items-center gap-2 text-sm font-bold text-sun"><Sparkles size={16} /> {today}</div><p className="text-xs font-bold uppercase tracking-[.18em] text-white/55">Today's devotional · {featuredLesson.category}</p><h1 className="mt-3 font-display text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl">{featuredLesson.devotional.title}</h1><p className="mt-4 max-w-sm text-sm leading-6 text-white/70">{featuredLesson.devotional.hook}</p><Button className="mt-7" onClick={() => navigate('/devotionals')}>Read devotional <ArrowRight className="ml-2" size={18} /></Button></div>
     </section>
     <div className="grid grid-cols-2 gap-3"><Card className="p-5"><div className="mb-4 flex items-center justify-between"><Flame className="text-coral" size={23} /><span className="text-xs font-bold text-ink/40">STREAK</span></div><p className="font-display text-3xl font-bold">7 <span className="text-base font-medium text-ink/50">days</span></p><p className="mt-1 text-xs text-ink/50">Keep showing up</p></Card><Card className="p-5"><div className="mb-4 flex items-center justify-between"><Star className="text-sun" size={23} fill="currentColor" /><span className="text-xs font-bold text-ink/40">POINTS</span></div><p className="font-display text-3xl font-bold">980</p><p className="mt-1 text-xs text-ink/50">This month</p></Card></div>
     <section><div className="mb-3 flex items-end justify-between"><div><p className="text-xs font-bold uppercase tracking-widest text-coral">Your journey</p><h2 className="mt-1 font-display text-2xl font-bold">Keep exploring</h2></div><button onClick={() => navigate('/games')} className="text-sm font-bold text-ink/50">See all</button></div><Card className="flex items-center gap-4 p-4"><div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-[#fff5d6] text-sun"><Trophy size={26} /></div><div className="min-w-0 flex-1"><div className="flex justify-between text-sm font-bold"><span>First steps</span><span>2/3</span></div><Progress value={66} /><p className="mt-2 text-xs text-ink/50">Complete one more game to unlock your next badge.</p></div><LockKeyhole size={17} className="text-ink/25" /></Card></section>
@@ -81,6 +84,8 @@ export default function App() {
     <Route element={<RequireAuth session={session} loading={loading} />}>
       <Route element={<AppShell />}>
         <Route path="/" element={<Home />} />
+        <Route path="/devotionals" element={<Devotionals />} />
+        <Route path="/create-devotional" element={<DevotionalCreator />} />
         <Route path="/games" element={<Games />} />
         <Route path="/create-game" element={<GameCreator />} />
         <Route path="/leaderboard" element={<Leaderboard />} />

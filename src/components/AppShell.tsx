@@ -5,6 +5,7 @@ import { supabase } from '@/lib/supabase'
 
 const navItems = [
   { to: '/', label: 'Home', icon: Home },
+  { to: '/devotionals', label: 'Devotionals', icon: BookOpen },
   { to: '/games', label: 'Games', icon: Gamepad2 },
   { to: '/leaderboard', label: 'Ranks', icon: Trophy },
   { to: '/profile', label: 'Profile', icon: UserRound },
