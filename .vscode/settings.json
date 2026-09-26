@@ -1,0 +1,9 @@
+{
+  "VsCodeTaskButtons.tasks": [
+    {
+      "label": "$(play) Run Dev",
+      "task": "Everon: Development Server",
+      "tooltip": "Start the Everon development server"
+    }
+  ]
+}

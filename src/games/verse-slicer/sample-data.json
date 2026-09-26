@@ -1,0 +1,12 @@
+{
+  "gameId": "john-3-16",
+  "reference": "John 3:16",
+  "translation": "ESV",
+  "scrambledWords": [
+    "For", "God", "so", "loved", "the", "world,", "that", "He", "gave", "His", "only", "Son,", "that", "whoever", "believes", "in", "Him", "should", "not", "perish", "but", "have", "eternal", "life."
+  ],
+  "correctOrder": [
+    "For", "God", "so", "loved", "the", "world,", "that", "He", "gave", "His", "only", "Son,", "that", "whoever", "believes", "in", "Him", "should", "not", "perish", "but", "have", "eternal", "life."
+  ],
+  "speedSettings": { "fallSpeed": "medium", "spawnIntervalMs": 650 }
+}
