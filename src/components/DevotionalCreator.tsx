@@ -7,23 +7,25 @@ import type { FeedCard, FeedGame } from '@/data/devotional-feed'
 
 type CardDraft = { cardType: 'textual' | 'image' | 'video'; reference: string; hook: string; insight: string; mediaUrl: string }
 
-const gameChoices: FeedGame[] = [
-  { gameId: 'verse-slicer-new', engineType: 'verse-slicer', title: 'Verse Slicer', description: 'Tap words in chronological order.', badge: 'Arcade', icon: '⚡' },
-  { gameId: 'pinpoint-new', engineType: 'pinpoint', title: 'Pinpoint', description: 'Guess the answer before the clues run out.', badge: 'Logic', icon: '◎' },
-  { gameId: 'connections-new', engineType: 'connections', title: 'Bible Connections', description: 'Sort theme words into hidden categories.', badge: 'Puzzle', icon: '◈' },
+const gameChoices = (lessonKey: string): FeedGame[] => [
+  { gameId: `verse-slicer-${lessonKey}`, engineType: 'verse-slicer', title: 'Verse Slicer', description: 'Tap words in chronological order.', badge: 'Arcade', icon: '⚡' },
+  { gameId: `pinpoint-${lessonKey}`, engineType: 'pinpoint', title: 'Pinpoint', description: 'Guess the answer before the clues run out.', badge: 'Logic', icon: '◎' },
+  { gameId: `connections-${lessonKey}`, engineType: 'connections', title: 'Bible Connections', description: 'Sort theme words into hidden categories.', badge: 'Puzzle', icon: '◈' },
 ]
 
 const newCard = (reference = ''): CardDraft => ({ cardType: 'textual', reference, hook: '', insight: '', mediaUrl: '' })
 
 function createFeedCards(cards: CardDraft[], reference: string, title: string): FeedCard[] {
+  const lessonKey = reference.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'lesson'
   const contentCards: FeedCard[] = cards.map((card, index) => ({
     cardIndex: index + 1,
     type: 'content',
+    cardType: card.cardType,
     backgroundType: card.cardType === 'textual' ? 'gradient' : card.cardType,
     mediaUrl: card.cardType === 'textual' ? `gradient-${index % 2 === 0 ? 'trust' : 'insight'}` : card.mediaUrl,
     overlayText: { reference: card.reference || (index === 0 ? reference : undefined), title: index === 0 ? title : undefined, hook: card.hook || undefined, insight: card.insight || undefined },
   }))
-  return [...contentCards, { cardIndex: contentCards.length + 1, type: 'game-grid', backgroundType: 'gradient', mediaUrl: 'gradient-arcade-dark', cardTitle: 'Lock it in.', cardSubtitle: "Choose a game to keep today's lesson close.", overlayText: { reference }, games: gameChoices }]
+  return [...contentCards, { cardIndex: contentCards.length + 1, type: 'game-grid', cardType: 'game-grid', backgroundType: 'gradient', mediaUrl: 'gradient-arcade-dark', cardTitle: 'Lock it in.', cardSubtitle: "Choose a game to keep today's lesson close.", overlayText: { reference }, games: gameChoices(lessonKey) }]
 }
 
 function PreviewCard({ card }: { card: FeedCard }) {

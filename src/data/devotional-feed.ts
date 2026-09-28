@@ -12,7 +12,8 @@ export type FeedGame = {
 
 export type FeedCard = {
   cardIndex: number
-  type: 'content' | 'game-grid'
+  type?: 'content' | 'game-grid'
+  cardType?: 'textual' | 'image' | 'video' | 'game-grid'
   backgroundType: 'image' | 'video' | 'gradient'
   mediaUrl?: string
   cardTitle?: string
@@ -21,18 +22,24 @@ export type FeedCard = {
   games?: FeedGame[]
 }
 
-export type DevotionalFeedPayload = {
+export type DevotionalPackage = {
   devotionalId: string
   title: string
+  reference: string
+  translation: string
   cards: FeedCard[]
 }
 
+export type DevotionalFeedPayload = DevotionalPackage
+
 export function createDevotionalFeed(lesson: Lesson): DevotionalFeedPayload {
-  if (lesson.cards?.length) return { devotionalId: lesson.lessonId, title: lesson.devotional.title, cards: lesson.cards }
+  if (lesson.cards?.length) return { devotionalId: lesson.lessonId, title: lesson.devotional.title, reference: lesson.reference, translation: lesson.translation, cards: lesson.cards }
 
   return {
     devotionalId: lesson.lessonId,
     title: lesson.devotional.title,
+    reference: lesson.reference,
+    translation: lesson.translation,
     cards: [
       {
         cardIndex: 1,
